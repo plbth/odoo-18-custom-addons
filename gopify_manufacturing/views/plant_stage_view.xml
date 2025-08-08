@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Form view -->
+    <record id="plant_stage_view_form" model="ir.ui.view">
+        <field name="name">plant.stage.form</field>
+        <field name="model">plant.stage</field>
+        <field name="arch" type="xml">
+            <form string="Development Stage">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--List view-->
+    <record id="plant_stage_view_list" model="ir.ui.view">
+        <field name="name">plant.stage.list</field>
+        <field name="model">plant.stage</field>
+        <field name="arch" type="xml">
+            <list string="Development Stages">
+                <field name="sequence" widget="handle"/>
+                <field name="sequence"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="plant_stage_view_search" model="ir.ui.view">
+        <field name="name">plant.stage.search</field>
+        <field name="model">plant.stage</field>
+        <field name="arch" type="xml">
+            <search string="Search Plant's Development Stage">
+                <field name="name" string="Name or Code" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
+                <separator/>
+                <filter name="filter_active" string="Working" domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Saved" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action -->
+    <record id="plant_stage_action" model="ir.actions.act_window">
+        <field name="name">Plant's Development Stage</field>
+        <field name="res_model">plant.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    
+    <!-- Menu Items-->
+    <menuitem
+        id="plant_stage_menu"
+        name="Plant's Development Stage"
+        action="gopify_manufacturing.plant_stage_action"
+        parent="mrp.menu_mrp_config"
+        sequence="100"
+    />
+</odoo>
