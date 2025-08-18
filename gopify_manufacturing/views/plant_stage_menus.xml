@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Menu Items-->
+    <menuitem id="menu_plant_stage_root"
+        name="Plant stage"
+        sequence="10"
+    />
+
+    <menuitem
+        id="plant_stage_menu"
+        name="Plant's Development Stage"
+        action="gopify_manufacturing.plant_stage_action"
+        parent="menu_plant_stage_root"
+        sequence="25"
+    />
+</odoo>

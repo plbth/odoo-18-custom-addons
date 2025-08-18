@@ -1,0 +1,20 @@
+<odoo>
+    <!-- Groups -->
+    <record id="group_plant_stage_user" model="res.groups">
+        <field name="name">Plant Stage User</field>
+    </record>
+
+    <record id="group_plant_stage_manager" model="res.groups">
+        <field name="name">Plant Stage Manager</field>
+        <field name="implied_ids" eval="[Command.link(ref('group_plant_stage_user'))]"/>
+        <field name="users" eval="[Command.link(ref('base.user_admin')), Command.link(ref('base.user_root'))]"/>
+    </record>
+
+    <!-- Record rules -->
+    <record id="plant_stage_company_rule" model="ir.rule">
+        <field name="name">Plant Stage multi company rule</field>
+        <field name="model_id" ref="model_plant_stage"/>
+        <field name="groups" eval="[Command.link(ref('gopify_manufacturing.group_plant_stage_user'))]"/>
+        <field name="domain_force">['|', ('company_id', 'in', user.company_ids.ids), ('company_id', '=', False)]</field>
+    </record>
+</odoo>

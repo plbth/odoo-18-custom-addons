@@ -7,28 +7,64 @@
         <field name="arch" type="xml">
             <form string="Development Stage">
                 <sheet>
+                    <!-- Stat button -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_mrp_productions"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-industry">
+                            <field name="count_mrp" widget="statinfo" string="Manufacturing"/>
+                        </button>
+                    </div>
+                    <!-- Title -->
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Seedling Stage"/></h1>
+                    </div>
+
                     <group>
-                        <field name="code"/>
-                        <field name="name"/>
-                        <field name="sequence"/>
-                        <field name="active" widget="boolean_toggle"/>
+                        <group>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
                     </group>
+
+                    <notebook>
+                        <page string="Manufacturing Orders" name="mrp_production_lines">
+                            <field name="mrp_production_ids">
+                                <list>
+                                    <field name="name" />
+                                    <field name="product_id" />
+                                    <field name="product_qty" />
+                                    <field name="state" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
+                <!-- Chatter -->
+                <chatter/>
             </form>
         </field>
     </record>
 
-    <!--List view-->
+    <!--List
+    view-->
     <record id="plant_stage_view_list" model="ir.ui.view">
         <field name="name">plant.stage.list</field>
         <field name="model">plant.stage</field>
         <field name="arch" type="xml">
             <list string="Development Stages">
-                <field name="sequence" widget="handle"/>
-                <field name="sequence"/>
-                <field name="code"/>
-                <field name="name"/>
-                <field name="active" widget="boolean_toggle"/>
+                <field name="sequence" widget="handle" />
+                <field name="sequence" />
+                <field name="code" />
+                <field name="name" />
+                <field name="company_id" />
+                <field name="active" widget="boolean_toggle" />
             </list>
         </field>
     </record>
@@ -39,27 +75,24 @@
         <field name="model">plant.stage</field>
         <field name="arch" type="xml">
             <search string="Search Plant's Development Stage">
-                <field name="name" string="Name or Code" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
-                <separator/>
-                <filter name="filter_active" string="Working" domain="[('active', '=', True)]"/>
-                <filter name="filter_inactive" string="Saved" domain="[('active', '=', False)]"/>
+                <field name="name" string="Name or Code"
+                    filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]" />
+                <separator />
+                <filter name="filter_active" string="Working" domain="[('active', '=', True)]" />
+                <filter name="filter_inactive" string="Saved" domain="[('active', '=', False)]" />
             </search>
         </field>
     </record>
-    
+
     <!-- Action -->
     <record id="plant_stage_action" model="ir.actions.act_window">
         <field name="name">Plant's Development Stage</field>
         <field name="res_model">plant.stage</field>
         <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your manufacturing stages.
+            </p>
+        </field>
     </record>
-    
-    <!-- Menu Items-->
-    <menuitem
-        id="plant_stage_menu"
-        name="Plant's Development Stage"
-        action="gopify_manufacturing.plant_stage_action"
-        parent="mrp.menu_mrp_config"
-        sequence="100"
-    />
 </odoo>
