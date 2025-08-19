@@ -52,8 +52,7 @@
         </field>
     </record>
 
-    <!--List
-    view-->
+    <!--List view-->
     <record id="plant_stage_view_list" model="ir.ui.view">
         <field name="name">plant.stage.list</field>
         <field name="model">plant.stage</field>
@@ -78,8 +77,14 @@
                 <field name="name" string="Name or Code"
                     filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]" />
                 <separator />
-                <filter name="filter_active" string="Working" domain="[('active', '=', True)]" />
-                <filter name="filter_inactive" string="Saved" domain="[('active', '=', False)]" />
+
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]" help="Show only active stages" />
+                <filter name="filter_inactive" string="Archived" domain="[('active', '=', False)]" help="Show archived stages" />
+
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="group_by_company" context="{'group_by': 'company_id'}"/>
+                    <filter string="Sequence" name="group_by_sequence" context="{'group_by': 'sequence'}"/>
+                </group>
             </search>
         </field>
     </record>

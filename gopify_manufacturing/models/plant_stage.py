@@ -17,7 +17,7 @@ class PlantStage(models.Model):
     mrp_production_ids = fields.One2many('mrp.production', 'plant_stage_id', string='Manufacturing Orders', tracking=True)
 
     # Computed fields
-    count_mrp = fields.Integer(compute="_compute_count_mrp_production", string="Manufacturing Count")
+    count_mrp = fields.Integer(compute="_compute_count_mrp_production", string="Manufacturing Count", store=True)
 
     _sql_constraints = [
         ('code_unique', 'UNIQUE(code)', 'The code must be unique.'),

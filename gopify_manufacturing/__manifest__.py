@@ -8,7 +8,9 @@
         'security/ir.model.access.csv',
         'security/plant_stage_security.xml',
         'views/plant_stage_view.xml',
-        'views/plant_stage_menus.xml'
+        'views/plant_stage_menus.xml',
+        'views/mrp_production_view.xml',
+        
     ],
     'application': True,
     'installable': True,
