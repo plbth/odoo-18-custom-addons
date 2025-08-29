@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard form -->
+    <record id="view_sale_confirm_wizard_form" model="ir.ui.view">
+        <field name="name">sale.confirm.wizard.form</field>
+        <field name="model">sale.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- This field is hidden but necessary for logic -->
+                <field name="sale_order_id" invisible="1"/>
+
+                <!-- Display the dynamic confirmation message -->
+                <div col="2" class="alert alert-warning" role="alert">
+                    <span class="mb-16"><strong><field name="confirmation_message" nolabel="1"/><br/></strong></span>
+                    <span>Confirmation will lock the quotation and create a sales order.<br/></span>
+                </div>
+
+                <group>
+                    <group>
+                        <field name="team_id" />
+                        <!-- The user who is confirming -->
+                        <field name="confirmer_id"/>
+                    </group>
+                    <group>
+                        <!-- Original Quotation Date for reference -->
+                        <field name="quotation_date"/>
+                        <field name="confirmation_date"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="action_confirm_order" string="Confirm Order" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Windows action -->
+    <record id="action_sale_confirm_wizard" model="ir.actions.act_window">
+        <field name="name">Confirm Quotation into Sales Order</field>
+        <field name="res_model">sale.confirm.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

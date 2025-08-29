@@ -1,0 +1,28 @@
+<odoo>
+    <record id="sale_order_view_search_inherit_gopify" model="ir.ui.view">
+        <field name="name">sale.order.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="name" string="Customer's Phone" 
+                    filter_domain="[('partner_id.phone', 'ilike', self)]"
+                />
+            </field>
+            <filter name="my_sale_orders_filter" position="before">
+                
+                <filter name="today_order" string="Today's Order" 
+                        domain="[
+                            ('date_order', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')),
+                            ('date_order', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))
+                        ]" />
+                <filter name="today_commitment" string="Today's Commitment" 
+                        domain="[
+                            ('commitment_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')),
+                            ('commitment_date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))
+                        ]" />
+                <separator/>
+            </filter>
+        </field>
+    </record>
+</odoo>
