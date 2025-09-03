@@ -16,7 +16,7 @@ class SaleConfirmWizard(models.TransientModel):
 
     sale_order_id = fields.Many2one('sale.order', string='Sale Order', readonly=True)
     team_id = fields.Many2one('crm.team', string='Sales Team', related='sale_order_id.team_id', readonly=True)
-    confirmer_id = fields.Many2one('res.users', string='Confirm by', default=lambda self: self.env.user)
+    confirmer_id = fields.Many2one('res.users', string='Confirm by', default=lambda self: self.env.user, help='Sales Manager approving this quotation')
 
 
     def action_confirm_order(self):
@@ -41,7 +41,7 @@ class SaleConfirmWizard(models.TransientModel):
         order = self.sale_order_id
         order.write({
             'date_order': self.confirmation_date,
-            'user_id': self.confirmer_id.id,
+            'confirmer_id': self.confirmer_id.id,
         })
         # Confirm the order (bypass wizard)
         order.with_context(skip_confirm_wizard=True).action_confirm()

@@ -6,8 +6,11 @@
     'depends': ['sale','sale_management',],
     'data': [
         'security/ir.model.access.csv',
+        'data/paperformat_data.xml',
         'views/sale_order_view.xml',
         'wizard/sale_confirm_wizard_view.xml',
+        'views/sale_report_actions.xml',
+        'views/sale_report_templates.xml',
     ],
     'application': False,
     'installable': True,
