@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Graph View -->
+    <record id="view_sale_order_report_analysis_graph" model="ir.ui.view">
+        <field name="name">sale.order.report.analysis.graph</field>
+        <field name="model">sale.order.report.analysis</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Analysis" sample="1">
+                <field name="product_id" />
+                <field name="total_sold" sum="Total Sold Quantity" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_sale_order_report_analysis_list" model="ir.ui.view">
+        <field name="name">sale.order.report.analysis.list</field>
+        <field name="model">sale.order.report.analysis</field>
+        <field name="arch" type="xml">
+            <list string="Sales Analysis">
+                <field name="product_id" />
+                <field name="total_sold" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_sale_order_report_analysis" model="ir.actions.act_window">
+        <field name="name">Báo Cáo Sản Phẩm Bán Chạy</field>
+        <field name="res_model">sale.order.report.analysis</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">
+            {
+                'graph_measure': 'total_sold',
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No sales data found!
+            </p>
+            <p>
+                This report shows sales analysis based on confirmed orders.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sale_order_report_analysis_menu"
+        name="Sales Analysis"
+        parent="sale.menu_sale_report"
+        action="action_sale_order_report_analysis"
+        sequence="50" />
+    
+</odoo>

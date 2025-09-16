@@ -7,10 +7,11 @@
         <field name="report_type">qweb-html</field>
         <!-- This name must match with _name in the Python file and template ID -->
         <field name="report_name">gopify_sale.template_custom_quotation</field>
+        <field name="report_file">gopify_sale.template_custom_quotation</field>
+        <field name="print_report_name">'Bao-gia-%s' % (object.name)</field>
         <field name="binding_model_id" ref="sale.model_sale_order"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="gopify_sale.paperformat_custom_quotation"/>
-        <field name="print_report_name">'Bao-gia-%s' % (object.name)</field>
     </record>
 
 </odoo>

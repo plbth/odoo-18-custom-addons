@@ -1,0 +1,149 @@
+// SCSS Variables
+$quotation-font-size: 12px;
+$quotation-line-height: 1.3;
+$quotation-border: 1px solid #000;
+$quotation-cell-padding: 0.3125rem;
+$quotation-header-padding: 0.5rem;
+$quotation-bg-light: #f0f0f0;
+$quotation-signature-height: 60px;
+
+// Base quotation template
+.quotation {
+    font-family: 'Times New Roman', serif;
+    font-size: $quotation-font-size;
+    line-height: $quotation-line-height;
+}
+
+// Header layout using flexbox (more modern than table display)
+.quotation_header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.quotation_logo {
+    flex: 0 0 50%;
+}
+
+.quotation_company {
+    flex: 0 0 50%;
+    text-align: right;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    .company_details {
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+}
+
+// Customer information
+.customer_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-bottom: 1rem;
+
+    .info_row {
+        display: flex;
+
+        .info_label {
+            flex: 0 0 12%;
+            font-weight: bold;
+        }
+
+        .info_value {
+            flex: 1;
+            padding-left: 0.125rem;
+        }
+    }
+}
+
+// Product table
+.quotation_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.25rem;
+    border: $quotation-border;
+
+    th,
+    td {
+        border: $quotation-border;
+        padding: $quotation-cell-padding;
+        text-align: left;
+    }
+
+    th {
+        padding: $quotation-header-padding;
+        background-color: $quotation-bg-light;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    // Column sizing - more flexible approach
+    .col_stt { width: 5%; }
+    .col_unit { width: 8%; }
+    .col_qty { width: 8%; }
+    .col_price { width: 12%; }
+    .col_discount { width: 10%; }
+    .col_tax { width: 10%; }
+    .col_total { width: 15%; }
+
+    .total_row {
+        background-color: $quotation-bg-light;
+        font-weight: bold;
+
+        td {
+            padding: $quotation-header-padding;
+        }
+    }
+}
+
+// Signature section using flexbox
+.quotation_signature {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+    page-break-inside: avoid;
+
+    .signature_left {
+        flex: 0 0 50%;
+    }
+
+    .signature_right {
+        flex: 0 0 50%;
+        text-align: center;
+
+        .signature_space {
+            height: $quotation-signature-height;
+        }
+    }
+}
+
+// Utility classes following Odoo patterns
+.quotation_title {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.quotation_notes {
+    font-style: italic;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.quotation_terms {
+    margin: 1rem 0;
+
+    .terms_title {
+        font-weight: bold;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    .terms_content {
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+}

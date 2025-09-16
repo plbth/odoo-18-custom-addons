@@ -4,113 +4,92 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.basic_layout">
-                    <div class="page"
-                        style="font-family: 'Times New Roman', serif; font-size: 12px; line-height: 1.3;">
-
+                    <div class="page quotation">
                         <!-- HEADER SECTION -->
-                        <div style="display: table; width: 100%; margin-bottom: 20px;">
-                            <div style="display: table-cell; width: 50%; vertical-align: top;">
-                                <div style="text-align: left;"> <!-- center -->
-                                    <img t-if="doc.company_id.logo"
-                                        t-att-src="image_data_uri(doc.company_id.logo)"
-                                        style="max-height: 60px; max-width: 150px;" alt="Logo"
-                                    />
-                                    <br />
-                                    <strong style="font-size: 11px;">Logo Công Ty</strong>
-                                </div>
+                        <div class="quotation_header">
+                            <div class="quotation_logo">
+                                <img t-if="doc.company_id.logo"
+                                    t-att-src="image_data_uri(doc.company_id.logo)"
+                                    class="o_company_logo" alt="Logo Công ty"
+                                />
                             </div>
-                            <div
-                                style="display: table-cell; width: 50%; vertical-align: top; text-align: right;">
-                                <strong style="font-size: 11px;">Thông tin Công Ty</strong>
-                                <br />
-                                <div style="font-size: 10px; margin-top: 5px;">
-                                    <strong>
-                                        <span t-field="doc.company_id.name" />
-                                    </strong>
-                                    <br />
-                                    <span t-field="doc.company_id.street" />
-                                    <br />
-                                    <span t-if="doc.company_id.street2"
-                                        t-field="doc.company_id.street2" />
-                                    <br />
-                                    <span t-field="doc.company_id.city" />
-                                    <span t-if="doc.company_id.state_id">, <span
-                                            t-field="doc.company_id.state_id.name" />
-                                    </span>
-                                    <br />
-                                    <span t-if="doc.company_id.phone">Tel: <span
-                                            t-field="doc.company_id.phone" /></span>
-                                    <br />
-                                    <span t-if="doc.company_id.email">Email: <span
-                                            t-field="doc.company_id.email" /></span>
-                                </div>
+                            <div class="quotation_company">
+                                    Thông tin Công Ty
+                                    <div class="company-details">
+                                        <strong>
+                                            <span t-field="doc.company_id.name" />
+                                        </strong>
+                                        <br/>
+
+                                        <span t-field="doc.company_id.street" />
+                                        <br/>
+
+                                        <span t-if="doc.company_id.street2"
+                                              t-field="doc.company_id.street2" />
+                                        <br/>
+
+                                        <span t-field="doc.company_id.city" />
+                                        <span t-if="doc.company_id.state_id">, 
+                                            <span t-field="doc.company_id.state_id.name" />
+                                        </span>
+                                        <br/>
+
+                                        <span t-if="doc.company_id.phone">Tel: 
+                                            <span t-field="doc.company_id.phone" />
+                                        </span>
+                                        <br/>
+                                        
+                                        <span t-if="doc.company_id.email">Email: 
+                                            <span t-field="doc.company_id.email" />
+                                        </span>
+                                    </div>
                             </div>
                         </div>
 
                         <!-- TITLE -->
-                        <div style="text-align: center; margin: 20px 0;">
-                            <h2 style="font-size: 18px; font-weight: bold; margin: 0;">BẢNG BÁO GIÁ</h2>
+                        <div class="quotation_title">
+                            <h2 class="h3 fw-bold mb-0">BẢNG BÁO GIÁ</h2>
                         </div>
 
                         <!-- CUSTOMER INFO -->
-                        <div style="margin: 15px 0;">
-                            <div style="display: table; width: 100%;">
-                                <div style="display: table-row;">
-                                    <div
-                                        style="display: table-cell; width: 15%; font-weight: bold; padding: 2px 0;">
-                                        Khách hàng:
-                                    </div>
-                                    <div style="display: table-cell; padding: 2px 0;">
-                                        <span t-field="doc.partner_id.name" />
-                                    </div>
+                        <div class="customer_info">
+                            <div class="info_row">
+                                <div class="info_label">
+                                    Khách hàng:
                                 </div>
+                                <div class="info_value">
+                                    <span t-field="doc.partner_id.name" />
+                                </div>
+                            </div>
 
-                                <div style="display: table-row;">
-                                    <div
-                                        style="display: table-cell; width: 15%; font-weight: bold; padding: 2px 0;">
-                                        Địa chỉ:
-                                    </div>
-                                    <div style="display: table-cell; padding: 2px 0;">
-                                        <span t-field="doc.partner_id.street" />
-                                        <span t-if="doc.partner_id.street2">, <span
-                                                t-field="doc.partner_id.street2" /></span>
-                                        <span t-if="doc.partner_id.city">, <span
-                                                t-field="doc.partner_id.city" />
-                                        </span>
-                                    </div>
+                            <div class="info_row">
+                                <div class="info_label">
+                                    Địa chỉ:
+                                </div>
+                                <div class="info_value">
+                                    <span t-field="doc.partner_id.street" />
+                                    <span t-if="doc.partner_id.street2">, 
+                                        <span t-field="doc.partner_id.street2" />
+                                    </span>
+                                    <span t-if="doc.partner_id.city">, 
+                                        <span t-field="doc.partner_id.city" />
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- PRODUCT TABLE -->
-                        <table
-                            style="width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #000;">
+                        <table class="quotation_table">
                             <thead>
-                                <tr style="background-color: #f0f0f0;">
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 5%; font-weight: bold;">
-                                        STT</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; font-weight: bold;">
-                                        Sản Phẩm</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 8%; font-weight: bold;">
-                                        ĐVT</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 8%; font-weight: bold;">
-                                        SL</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 12%; font-weight: bold;">
-                                        Giá</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 10%; font-weight: bold;">
-                                        Giảm giá</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 10%; font-weight: bold;">
-                                        Thuế</th>
-                                    <th
-                                        style="border: 1px solid #000; padding: 8px; text-align: center; width: 15%; font-weight: bold;">
-                                        THÀNH TIỀN</th>
+                                <tr>
+                                    <th class="col_stt">STT</th>
+                                    <th>Sản Phẩm</th>
+                                    <th class="col_unit">ĐVT</th>
+                                    <th class="col_qty">SL</th>
+                                    <th class="col_price">Giá</th>
+                                    <th class="col_discount">Giảm giá</th>
+                                    <th class="col_tax">Thuế</th>
+                                    <th class="col_total">THÀNH TIỀN</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,110 +97,89 @@
                                 <t t-foreach="doc.order_line" t-as="line">
                                     <t t-set="stt" t-value="stt + 1" />
                                     <tr>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: center;">
+                                        <td class="text-center">
                                             <span t-esc="stt" />
                                         </td>
-                                        <td style="border: 1px solid #000; padding: 5px;">
+                                        <td>
                                             <span t-field="line.name" />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: center;">
+                                        <td class="text-center">
                                             <span t-field="line.product_uom.name" />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                        <td class="text-end">
                                             <span t-field="line.product_uom_qty"
-                                                t-options='{"widget": "float", "precision": 0}' 
-                                            />
+                                                  t-options='{"widget": "float", "precision": 0}' />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                        <td class="text-end">
                                             <span t-field="line.price_unit"
-                                                t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: right;">
-                                            <span t-esc="format_discount(line.discount)"/>
+                                        <td class="text-end">
+                                            <span t-esc="format_discount(line.discount)" />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                        <td class="text-end">
                                             <span t-esc="format_tax_rate(line.tax_id)" />
                                         </td>
-                                        <td
-                                            style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                        <td class="text-end">
                                             <span t-field="line.price_total"
-                                                t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
                                         </td>
-                                    </tr>
-                                </t>
-
-                                <!-- Empty row to match the image format -->
-                                <t t-foreach="range(1)" t-as="i">
-                                    <tr>
-                                        <td style="border: 1px solid #000; padding: 15px; text-align: center;">
-                                            <span t-esc="stt + i + 1"/>
-                                        </td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
-                                        <td style="border: 1px solid #000; padding: 15px;">&#160;</td>
                                     </tr>
                                 </t>
 
                                 <!-- TOTAL ROW -->
-                                <tr>
-                                    <td colspan="7"
-                                        style="border: 1px solid #000; padding: 8px; text-align: right; font-weight: bold; background-color: #f0f0f0;">
+                                <tr class="total_row">
+                                    <td colspan="7" class="text-end">
                                         Cộng
                                     </td>
-                                    <td
-                                        style="border: 1px solid #000; padding: 8px; text-align: right; font-weight: bold; background-color: #f0f0f0;">
+                                    <td class="text-end">
                                         <span t-field="doc.amount_total"
-                                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
                                     </td>
                                 </tr>
 
                                 <!-- AMOUNT IN WORDS -->
                                 <tr>
-                                    <em><td colspan="8"
-                                        style="border: 1px solid #000; padding: 4px 10px; font-style: italic;">
-                                        Bằng chữ:
-                                        <span
-                                            t-esc="amount_to_text_vi(doc.amount_total, doc.currency_id.name)" />
-                                    </td></em>
+                                    <td colspan="8" class="fst-italic">
+                                        Bằng chữ: <span t-esc="amount_to_text_vi(doc.amount_total, doc.currency_id.name)" />
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <!-- AMOUNT IN WORDS -->
-                        <div>
-                            <em style="font-size: 11px;">(Giá trên chưa bao gồm 10% thuế GTGT)</em>
+                        <!-- PRICE NOTES -->
+                        <div class="quotation_notes">
+                            (Giá trên chưa bao gồm 10% thuế GTGT)
                         </div>
 
                         <!-- TERMS AND CONDITIONS -->
-                        <div style="margin: 20px 0; font-style: italic;">
-                            <strong style="text-decoration: underline; font-size: 1.1em;">Thời gian thực hiện và phương thức thanh toán:</strong>
-                            <br/>
-                            <span>
-                                vui lòng xem tại:
-                            </span>
+                        <div class="quotation_terms">
+                            <div class="terms_title">
+                                <span class="fw-bold fst-italic text-decoration-underline">
+                                    Thời gian thực hiện và phương thức thanh toán:
+                                </span>
+                            </div>
+                            <div class="terms_content">
+                                <span t-field="doc.date_order"/>
+                                <span t-field="doc.payment_term_id" t-if="doc.payment_term_id"/>
+                                <br/>
+                                vui lòng xem tại:   
+                            </div>
                         </div>
 
                         <!-- SIGNATURE SECTION -->
-                        <div style="margin-top: 20px; page-break-inside: avoid;">
-                            <div style="display: table; width: 100%;">
-                                <div style="display: table-cell; width: 50%;"></div>
-                                <div style="display: table-cell; width: 50%; text-align: center;">
-                                    <strong>Địa chỉ, Ngày .... tháng .... năm ....</strong>
-                                    <br />
-                                    <strong style="height: 10px;">Giám Đốc</strong>
-                                    <br />
-                                    <div style="height: 60px;"></div> <!-- Space for signature -->
-                                    <strong>Ký ghi rõ họ tên</strong>
+                        <div class="quotation_signature">
+                            <div class="signature_left"></div>
+                            <div class="signature_right">
+                                <div class="fw-bold mb-2">
+                                    Địa chỉ, Ngày .... tháng .... năm ....
+                                </div>
+                                <div class="fw-bold mb-2">
+                                    Giám Đốc
+                                </div>
+                                <div class="signature_space"></div>
+                                <div class="fw-bold">
+                                    Ký ghi rõ họ tên
                                 </div>
                             </div>
                         </div>

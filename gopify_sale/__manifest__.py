@@ -11,7 +11,13 @@
         'wizard/sale_confirm_wizard_view.xml',
         'views/sale_report_actions.xml',
         'views/sale_report_templates.xml',
+        'report/sale_analysis_report_views.xml',
     ],
+    'assets': {
+        'web.report_assets_common': [
+            'gopify_sale/static/src/scss/gopify_sale_report.scss',
+        ],
+    },
     'application': False,
     'installable': True,
     'auto_install': False,
