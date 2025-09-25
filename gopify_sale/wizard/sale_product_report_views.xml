@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add button at Sale Order (Orders menuitem) to view report wizard -->
+    <record id="view_order_tree_button_inherit_gopify_sale" model="ir.ui.view">
+        <field name="name">sale.order.tree.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree" />
+        <field name="arch" type="xml">
+            <list position="inside">
+                <header>
+                    <button string="Thống kê sản phẩm bán hàng"
+                            name="%(action_sale_product_analysis_wizard)d"
+                            type="action"
+                            class="btn-secondary" 
+                            display="always"/>
+                </header>
+            </list>
+        </field>
+    </record>
+
+    <!-- Wizard form -->
+    <record id="sale_product_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">sale.product.report.wizard.form</field>
+        <field name="model">sale.product.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="analysis_type" widget="radio" />
+                        <field name="year" />
+                    </group>
+                    <group>
+                        <field name="month" invisible="analysis_type != 'month'"
+                               required="analysis_type == 'month'" />
+                        <field name="quarter" invisible="analysis_type != 'quarter'"
+                               required="analysis_type == 'quarter'" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="View Report" type="object" name="action_view_report"
+                            class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inherit filter for Sale Order Line to add custom filters -->
+    <record id="view_sales_order_line_filter" model="ir.ui.view">
+        <field name="name">view.sales.order.line.filter.inherit.gopify.sale</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_sales_order_line_filter"></field>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter string="Khách hàng" name="group_by_customer" context="{'group_by': 'order_partner_id'}"/>
+                <filter name="date_today" string="Theo ngày hôm nay" 
+                        domain="[
+                            ('order_id.date_order', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)).to_utc() ),
+                            ('order_id.date_order', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0,0,0)).to_utc() )
+                        ]" />
+                <filter name="date_this_week" string="Theo tuần này" 
+                        domain="[
+                            ('order_id.date_order', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(weeks=-1, days=1, weekday=0), datetime.time(0,0,0)).to_utc() ),
+                            ('order_id.date_order', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1, weekday=0), datetime.time(0,0,0)).to_utc() )
+                        ]" />
+                <filter name="date_this_month" string="Theo tháng này" 
+                        domain="[
+                            ('order_id.date_order', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(day=1), datetime.time(0,0,0)).to_utc() ),
+                            ('order_id.date_order', '&lt;', datetime.datetime.combine(context_today() + relativedelta(day=1, months=1), datetime.time(0,0,0)).to_utc() )
+                        ]" />
+                <filter name="date_this_year" string="Theo năm nay" 
+                        domain="[
+                            ('order_id.date_order', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(day=1, month=1), datetime.time(0,0,0)).to_utc() ),
+                            ('order_id.date_order', '&lt;', datetime.datetime.combine(context_today() + relativedelta(day=1, month=1, years=1), datetime.time(0,0,0)).to_utc() )
+                        ]" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action to open the wizard -->
+    <record id="action_sale_product_analysis_wizard" model="ir.actions.act_window">
+        <field name="name">Báo cáo phân tích sản phẩm</field>
+        <field name="res_model">sale.product.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -12,6 +12,7 @@
         'views/sale_report_actions.xml',
         'views/sale_report_templates.xml',
         'report/sale_analysis_report_views.xml',
+        'wizard/sale_product_report_views.xml',
     ],
     'assets': {
         'web.report_assets_common': [
